@@ -1,3 +1,7 @@
+This README was written in two languages:
+- **Polski** [Polski](#polski)
+- **English** [English](#english)
+
 # Memory Game (English)
 
 ## Table of Contents

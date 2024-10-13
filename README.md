@@ -1,6 +1,6 @@
 This README was written in two languages:
-- **Polski** [Gra w Memory](#gra-w-memory)
-- **English** [Memory Game](#memory-game)
+- **English** [Memory Game](#memory-game-english)
+-  **Polski** [Gra w Memory](#gra-w-memory-polski)
 
 # Memory Game (English)
 

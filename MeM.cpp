@@ -37,6 +37,7 @@ void displayTrophyAnimation(string player) {
               """"""""      
     )";
 
+    
     string trophy2 = R"(
              ___________
             '._==_==_=_.'  

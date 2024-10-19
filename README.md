@@ -145,7 +145,7 @@ Input:
 
 ## Opis projektu
 
-To prosta gra w pamięć działająca w konsoli, w której gracze odkrywają pary kart na planszy, próbując dopasować symbole. Gra może być rozgrywana w dwóch trybach:
+To prosta gra w memory działająca w konsoli, w której gracze odkrywają pary kart na planszy, próbując dopasować symbole. Gra może być rozgrywana w dwóch trybach:
 - **Tryb 2-graczy**: Dwóch graczy na zmianę odkrywa karty, aby dopasować pary.
 - **Tryb vs. komputer**: Jeden gracz rywalizuje z komputerem.
 

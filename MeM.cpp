@@ -131,22 +131,35 @@ void initializeBoard(vector<vector<char>>& board) {
     vector<char> symbols;
     int totalCards = board.size() * board[0].size();
     
-    for (int i = 0; i < totalCards / 2; ++i) {
-        symbols.push_back('A' + i); // Dodaje symbole dla par kart.
-        symbols.push_back('A' + i);
+    // Użycie wielkich liter, małych liter oraz cyfr, aby mieć wystarczającą ilość symboli.
+    for (char c = 'A'; c <= 'Z'; ++c) symbols.push_back(c);
+    for (char c = 'a'; c <= 'z'; ++c) symbols.push_back(c);
+    for (char c = '0'; c <= '9'; ++c) symbols.push_back(c);
+
+    // Sprawdzenie, czy jest wystarczająca ilość symboli na planszę.
+    if (totalCards / 2 > symbols.size()) {
+        cerr << "Board is too big to generate unique symbols." << endl;
+        exit(1); // Wyjście, jeśli plansza jest zbyt duża na dostępne symbole.
     }
-    
+
+    // Duplikowanie symboli, aby stworzyć pary.
+    symbols.resize(totalCards / 2);
+    symbols.insert(symbols.end(), symbols.begin(), symbols.end());
+
+    // Tasowanie symboli.
     random_device rd;
     mt19937 g(rd());
-    shuffle(symbols.begin(), symbols.end(), g); // Tasuje symbole kart.
+    shuffle(symbols.begin(), symbols.end(), g);
 
+    // Przypisanie symboli do planszy.
     int k = 0;
     for (int i = 0; i < board.size(); ++i) {
         for (int j = 0; j < board[i].size(); ++j) {
-            board[i][j] = symbols[k++]; // Rozmieszcza symbole na planszy.
+            board[i][j] = symbols[k++];
         }
     }
 }
+
 
 // Funkcja wyświetlająca planszę po odkryciu karty.
 void revealCard(int row, int col, const vector<vector<char>>& board, vector<vector<bool>>& revealed) {
@@ -190,7 +203,6 @@ pair<int, int> computerPickCard(const vector<vector<bool>>& revealed, int rows, 
     return {r, c}; // Zwraca pozycję karty.
 }
 
-// Funkcja przeprowadzająca rozgrywkę dla wybranego trybu.
 void playGame(int rows, int cols, bool isVsComputer = false) {
     vector<vector<char>> board(rows, vector<char>(cols)); // Tworzy planszę.
     vector<vector<bool>> revealed(rows, vector<bool>(cols, false)); // Tworzy tablicę odkrytych kart.
@@ -198,111 +210,94 @@ void playGame(int rows, int cols, bool isVsComputer = false) {
     initializeBoard(board); // Inicjalizuje planszę z kartami.
 
     int currentPlayer = 1; // Ustawia aktualnego gracza.
-    int pairsFound = 0; // Liczba znalezionych par.
-    int totalPairs = (rows * cols) / 2; // Całkowita liczba par.
+    int pairsFound = 0; // Liczba odkrytych par.
+    int totalPairs = (rows * cols) / 2; // Całkowita liczba par do odkrycia.
 
-    int player1Pairs = 0; // Punkty gracza 1.
-    int computerPairs = 0; // Punkty komputera.
+    int player1Pairs = 0, player2Pairs = 0, computerPairs = 0; // Liczba par odkrytych przez każdego gracza.
+    bool roundWon = false; // Czy gracz wygrał rundę.
 
-    while (pairsFound < totalPairs) { // Dopóki nie znaleziono wszystkich par.
-        bool extraTurn = false; // Czy gracz dostaje dodatkową rundę?
+    while (pairsFound < totalPairs) { // Główna pętla gry.
+        displayBoard(board, revealed); // Wyświetla planszę.
+        
+        int row1, col1, row2, col2; // Wybór dwóch kart.
 
-        do {
-            displayBoard(board, revealed); // Wyświetla planszę.
-            cout << "Player " << (currentPlayer == 1 ? "1" : (isVsComputer ? "Computer" : "2")) << "'s turn!" << endl;
-
-            int r1, c1, r2, c2;
-
-            if (currentPlayer == 2 && isVsComputer) {
-                tie(r1, c1) = computerPickCard(revealed, rows, cols); // Wybiera kartę dla komputera.
-                cout << "Computer selected: (" << r1 + 1 << ", " << c1 + 1 << ")" << endl;
-                this_thread::sleep_for(chrono::milliseconds(1000)); // Opóźnia wybór.
-            } else {
-                do {
-                    cout << "Enter row and column of first card: ";
-                    cin >> r1 >> c1;
-                    r1--; c1--;
-                    if (revealed[r1][c1]) {
-                        cout << "Card is already revealed! Choose a different one.\n"; // Sprawdza, czy karta nie jest już odkryta.
-                    }
-                } while (revealed[r1][c1]);
-            }
-
-            if (animationsEnabled) {
-                smoothRevealAnimation(r1, c1, board, revealed); // Odkrywa kartę z animacją.
-            } else {
-                revealCard(r1, c1, board, revealed); // Odkrywa kartę bez animacji.
-            }
-
-            if (currentPlayer == 2 && isVsComputer) {
-                tie(r2, c2) = computerPickCard(revealed, rows, cols); // Komputer wybiera drugą kartę.
-                cout << "Computer selected: (" << r2 + 1 << ", " << c2 + 1 << ")" << endl;
-                this_thread::sleep_for(chrono::milliseconds(1500));
-            } else {
-                do {
-                    cout << "Enter row and column of second card: ";
-                    cin >> r2 >> c2;
-                    r2--; c2--;
-                    if (r1 == r2 && c1 == c2) {
-                        cout << "You cannot choose the same card twice! Choose a different card.\n"; // Gracz nie może wybrać tej samej karty dwa razy.
-                    } else if (revealed[r2][c2]) {
-                        cout << "Card is already revealed! Choose a different one.\n";
-                    }
-                } while ((r1 == r2 && c1 == c2) || revealed[r2][c2]);
-            }
-
-            if (animationsEnabled) {
-                smoothRevealAnimation(r2, c2, board, revealed); // Odkrywa drugą kartę z animacją.
-            } else {
-                revealCard(r2, c2, board, revealed); // Odkrywa drugą kartę bez animacji.
-            }
-
-            if (board[r1][c1] == board[r2][c2]) { // Sprawdza, czy odkryte karty są takie same.
-                cout << "It's a match!";
-                pairsFound++; // Zwiększa liczbę znalezionych par.
-                if (currentPlayer == 1) {
-                    player1Pairs++; // Gracz 1 zdobywa punkt.
-                } else if (isVsComputer) {
-                    computerPairs++; // Komputer zdobywa punkt.
-                }
-                if (rewardsEnabled) { // Sprawdza, czy nagrody są włączone.
-                    cout << " " << (currentPlayer == 1 ? "Player 1" : (isVsComputer ? "Computer" : "Player 2")) << " gets an extra turn!" << endl;
-                    extraTurn = true; // Gracz dostaje dodatkową rundę.
-                } else {
-                    cout << endl;
-                    extraTurn = false;
-                }
-            } else {
-                cout << "Not a match." << endl; // Karty nie są takie same.
-                revealed[r1][c1] = false; // Ukrywa karty.
-                revealed[r2][c2] = false;
-                extraTurn = false;
-            }
-            this_thread::sleep_for(chrono::milliseconds(500)); // Krótkie opóźnienie.
-
-        } while (extraTurn && pairsFound < totalPairs); // Kontynuuje, jeśli gracz ma dodatkową rundę.
-
-        currentPlayer = (currentPlayer == 1) ? 2 : 1; // Zmienia gracza.
-    }
-
-    cout << "Game over! "; // Koniec gry.
-    if (isVsComputer) {
-        if (player1Pairs > computerPairs) {
-            cout << "Player 1 wins with " << player1Pairs << " pairs!" << endl; // Wyświetla wynik.
-            displayTrophyAnimation("Player 1");
-            
-        } else if (computerPairs > player1Pairs) {
-            cout << "Computer wins with " << computerPairs << " pairs!" << endl;
-            displayLoseAnimation();
+        // Wybór pierwszej karty
+        if (isVsComputer && currentPlayer == 2) {
+            do {
+                tie(row1, col1) = computerPickCard(revealed, rows, cols); // Komputer wybiera kartę.
+            } while (revealed[row1][col1]); // Sprawdzanie, czy karta nie została już odkryta.
         } else {
-            cout << "It's a tie!" << endl;
+            do {
+                cout << "Player " << currentPlayer << ", pick the first card (row and column): ";
+                cin >> row1 >> col1;
+                --row1; --col1; // Dopasowanie do indeksów tablicy.
+            } while (row1 < 0 || row1 >= rows || col1 < 0 || col1 >= cols || revealed[row1][col1]); // Sprawdzanie poprawności wyboru.
         }
-    } else {
-        displayTrophyAnimation("Player " + to_string((pairsFound % 2 == 0) ? 2 : 1));
+
+        if (animationsEnabled) smoothRevealAnimation(row1, col1, board, revealed); // Animacja odkrywania karty.
+        else revealCard(row1, col1, board, revealed); // Odkrywa kartę bez animacji.
+
+        // Wybór drugiej karty
+        if (isVsComputer && currentPlayer == 2) {
+            do {
+                tie(row2, col2) = computerPickCard(revealed, rows, cols); // Komputer wybiera kartę.
+            } while ((row1 == row2 && col1 == col2) || revealed[row2][col2]); // Sprawdzanie, czy karta nie została już odkryta.
+        } else {
+            do {
+                cout << "Player " << currentPlayer << ", pick the second card (row and column): ";
+                cin >> row2 >> col2;
+                --row2; --col2; // Dopasowanie do indeksów tablicy.
+            } while ((row1 == row2 && col1 == col2) || row2 < 0 || row2 >= rows || col2 < 0 || col2 >= cols || revealed[row2][col2]); // Sprawdzanie poprawności wyboru.
+        }
+
+        if (animationsEnabled) smoothRevealAnimation(row2, col2, board, revealed); // Animacja odkrywania karty.
+        else revealCard(row2, col2, board, revealed); // Odkrywa kartę bez animacji.
+
+        // Sprawdza, czy gracz odkrył parę.
+        if (board[row1][col1] == board[row2][col2]) {
+            cout << "It's a match!\n";
+            pairsFound++; // Zwiększa liczbę odkrytych par.
+            roundWon = true; // Gracz wygrał rundę.
+            if (currentPlayer == 1) player1Pairs++; // Aktualizacja wyniku gracza 1.
+            else if (isVsComputer) computerPairs++; // Aktualizacja wyniku komputera.
+            else player2Pairs++; // Aktualizacja wyniku gracza 2.
+        } else {
+            cout << "Not a match.\n";
+            this_thread::sleep_for(chrono::milliseconds(1000)); // Opóźnienie, aby gracze mogli zobaczyć wynik.
+            revealed[row1][col1] = revealed[row2][col2] = false; // Ukrywa karty, jeśli nie są parą.
+            roundWon = false; // Gracz nie wygrał rundy.
+        }
+
+        // Zmiana gracza, jeśli runda nie została wygrana lub jeśli nagrody są wyłączone.
+        if (!(roundWon && rewardsEnabled)) {
+            currentPlayer = (currentPlayer == 1) ? 2 : 1; // Zmienia aktualnego gracza.
+        }
     }
+
+    // Wyświetlanie wyników gry po zakończeniu.
+    cout << "\nGame Over! Final Results:\n";
+    cout << "Player 1 Pairs: " << player1Pairs << endl;
     
-    this_thread::sleep_for(chrono::milliseconds(3000)); // Czeka 3 sekundy przed zakończeniem gry.
+    if (isVsComputer) {
+        cout << "Computer Pairs: " << computerPairs << endl;
+    } else {
+        cout << "Player 2 Pairs: " << player2Pairs << endl;
+    }
+
+    // Wyświetlanie zwycięzcy.
+    if (player1Pairs > (isVsComputer ? computerPairs : player2Pairs)) {
+        displayTrophyAnimation("Player 1");
+    } else if (isVsComputer && computerPairs > player1Pairs) {
+        displayLoseAnimation(); // Komputer wygrywa, wyświetla animację przegranej.
+    } else if (!isVsComputer && player2Pairs > player1Pairs) {
+        displayTrophyAnimation("Player 2");
+    } else {
+        cout << "It's a tie!" << endl; // Remis.
+    }
 }
+
+
+
 
 // Funkcja obsługująca główne menu.
 void mainMenu() {

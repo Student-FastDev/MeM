@@ -178,7 +178,7 @@ Aby uruchomić ten program, potrzebujesz środowiska programistycznego C++. Gra 
    ```
 
    To stworzy plik wykonywalny o nazwie `MeM`.
-   Mozesz takze pobrac skompilowany plik zeby pominac ten krok.
+   Możesz także pobrać skompilowany plik, aby pominąć ten krok.
 
 5. **Uruchom grę**:
    Po skompilowaniu uruchom grę, wpisując:

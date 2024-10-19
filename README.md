@@ -1,4 +1,4 @@
-[Gigathon Icon](https://cdn.prod.website-files.com/63174d5b8c207c07e0f7a1af/645b6806ae8aee4c3876355a_gigathon-favicon.png)
+![Gigathon Icon](https://i.imgur.com/1mSIKP4.png)
 
 This README was written in two languages:
 - **English** [Memory Game](#memory-game-english)

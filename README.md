@@ -1,3 +1,5 @@
+[Gigathon Icon](https://cdn.prod.website-files.com/63174d5b8c207c07e0f7a1af/645b6806ae8aee4c3876355a_gigathon-favicon.png)
+
 This README was written in two languages:
 - **English** [Memory Game](#memory-game-english)
 -  **Polski** [Gra w Memory](#gra-w-memory-polski)
@@ -47,8 +49,9 @@ To run this program, you need a C++ development environment. The game is compati
    ```
 
    This will create an executable named `MeM`.
+   You can also download already compiled version to skip this step.
 
-4. **Run the game**:
+5. **Run the game**:
    After compiling, run the game by typing:
 
    ```
@@ -175,8 +178,9 @@ Aby uruchomić ten program, potrzebujesz środowiska programistycznego C++. Gra 
    ```
 
    To stworzy plik wykonywalny o nazwie `MeM`.
+   Mozesz takze pobrac skompilowany plik zeby pominac ten krok.
 
-4. **Uruchom grę**:
+5. **Uruchom grę**:
    Po skompilowaniu uruchom grę, wpisując:
 
    ```

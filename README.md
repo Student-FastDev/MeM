@@ -49,6 +49,7 @@ To run this program, you need a C++ development environment. The game is compati
    ```
 
    This will create an executable named `MeM`.
+
    [You can also download already compiled version to skip this step.](https://github.com/Student-FastDev/MeM/releases)
 
 5. **Run the game**:
@@ -178,6 +179,7 @@ Aby uruchomić ten program, potrzebujesz środowiska programistycznego C++. Gra 
    ```
 
    To stworzy plik wykonywalny o nazwie `MeM`.
+
    [Możesz także pobrać skompilowany plik, aby pominąć ten krok.](https://github.com/Student-FastDev/MeM/releases)
 
 5. **Uruchom grę**:

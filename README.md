@@ -9,7 +9,6 @@ This README was written in two languages:
 2. [Setup and Compilation](#setup-and-compilation)
 3. [Game Instructions](#game-instructions)
 4. [Key Features](#key-features)
-5. [Good Practices and Code Design](#good-practices-and-code-design)
 
 ---
 
@@ -138,7 +137,6 @@ Input:
 2. [Konfiguracja i kompilacja](#konfiguracja-i-kompilacja)
 3. [Instrukcje do gry](#instrukcje-do-gry)
 4. [Kluczowe funkcje](#kluczowe-funkcje)
-5. [Dobre praktyki i projekt kodu](#dobre-praktyki-i-projekt-kodu)
 
 ---
 

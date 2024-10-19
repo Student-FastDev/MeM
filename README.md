@@ -28,7 +28,7 @@ The game includes optional features like **animations** for smooth card reveals 
 
 ### Prerequisites
 
-To run this program, you need a C++ development environment. The game is compatible with most operating systems (Windows, Linux, macOS). The setup depends on your system, but generally, you will need:
+To run this program, you need a C++ development environment. The game is compatible with most operating systems (Windows, Linux). The setup depends on your system, but generally, you will need:
 
 - A **C++ compiler** (e.g., g++, clang, or Visual Studio).
 - A terminal or command-line interface to compile and run the program.
@@ -157,7 +157,7 @@ Gra zawiera opcjonalne funkcje, takie jak **animacje** dla płynnych odkryć kar
 
 ### Wymagania wstępne
 
-Aby uruchomić ten program, potrzebujesz środowiska programistycznego C++. Gra jest kompatybilna z większością systemów operacyjnych (Windows, Linux, macOS). Konfiguracja zależy od twojego systemu, ale generalnie będziesz potrzebować:
+Aby uruchomić ten program, potrzebujesz środowiska programistycznego C++. Gra jest kompatybilna z większością systemów operacyjnych (Windows, Linux). Konfiguracja zależy od twojego systemu, ale generalnie będziesz potrzebować:
 
 - **Kompilatora C++** (np. g++, clang lub Visual Studio).
 - Terminala lub interfejsu wiersza poleceń do kompilacji i uruchamiania programu.

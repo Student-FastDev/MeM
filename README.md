@@ -207,14 +207,14 @@ Gdy uruchomisz grę, zobaczysz następujące główne menu:
 / \/ \ ) _) / \/ \
 \_)(_/(____)\_)(_/ 
 
-Witaj w grze w pamięć!
+Welcome to Memory Game!
 
-(1) Tryb 2-graczy
-(2) Tryb vs. komputer
-(3) Ustawienia
-(4) Wyjście
+(1) 2-Players Mode
+(2) Vs. Computer Mode
+(3) Settings
+(4) Exit
 
-Wybór: 
+Input: 
 ```
 
 ### Jak grać

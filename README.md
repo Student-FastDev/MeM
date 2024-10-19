@@ -44,22 +44,22 @@ To run this program, you need a C++ development environment. The game is compati
    Using a terminal, run the following command to compile the program (assuming `g++` is installed):
 
    ```
-   g++ -o memory_game memory_game.cpp
+   g++ -o MeM MeM.cpp
    ```
 
-   This will create an executable named `memory_game`.
+   This will create an executable named `MeM`.
 
 4. **Run the game**:
    After compiling, run the game by typing:
 
    ```
-   ./memory_game
+   ./MeM
    ```
 
    If you're on Windows, run it as:
 
    ```
-   memory_game.exe
+   MeM.exe
    ```
 
 ---
@@ -131,22 +131,6 @@ Input:
 
 ---
 
-## Good Practices and Code Design
-
-1. **Code Modularity**: The game logic is divided into several functions, each handling a specific part of the game (e.g., board initialization, animations, card selection). This makes the code easier to maintain and extend.
-
-2. **Use of Standard Libraries**:
-   - Libraries like `<vector>`, `<algorithm>`, `<chrono>`, and `<thread>` are utilized to handle dynamic data structures, shuffling cards, and creating smooth animations.
-   - These libraries improve code readability and efficiency.
-
-3. **Cross-Platform Support**: The game includes conditional compilation to clear the screen on both Windows (`cls`) and Unix/Linux (`clear`) systems.
-
-4. **Readability and Comments**: The code is well-commented, providing explanations for major functions and logic.
-
-5. **User-Friendly Prompts**: Error handling is incorporated (e.g., preventing players from selecting already revealed cards or the same card twice).
-
----
-
 # Gra w Memory (Polski)
 
 ## Spis treści
@@ -189,22 +173,22 @@ Aby uruchomić ten program, potrzebujesz środowiska programistycznego C++. Gra 
    W terminalu uruchom następujące polecenie, aby skompilować program (zakładając, że masz zainstalowany `g++`):
 
    ```
-   g++ -o memory_game memory_game.cpp
+   g++ -o MeM MeM.cpp
    ```
 
-   To stworzy plik wykonywalny o nazwie `memory_game`.
+   To stworzy plik wykonywalny o nazwie `MeM`.
 
 4. **Uruchom grę**:
    Po skompilowaniu uruchom grę, wpisując:
 
    ```
-   ./memory_game
+   ./MeM
    ```
 
    Jeśli jesteś na systemie Windows, uruchom jako:
 
    ```
-   memory_game.exe
+   MeM.exe
    ```
 
 ---
@@ -275,21 +259,5 @@ Wybór:
 
 5. **Dostosowywany rozmiar planszy**:
    - Gracze mogą dostosować liczbę wierszy i kolumn planszy.
-
----
-
-## Dobre praktyki i projekt kodu
-
-1. **Modularność kodu**: Logika gry jest podzielona na kilka funkcji, z których każda obsługuje konkretną część gry (np. inicjalizacja planszy, animacje, wybór kart). Ułatwia to utrzymanie i rozwój kodu.
-
-2. **Wykorzystanie standardowych bibliotek**:
-   - Biblioteki takie jak `<vector>`, `<algorithm>`, `<chrono>` i `<thread>` są używane do obsługi dynamicznych struktur danych, tasowania kart i tworzenia płynnych animacji.
-   - Te biblioteki poprawiają czytelność i efektywność kodu.
-
-3. **Wsparcie dla wielu platform**: Gra zawiera kompilację warunkową do czyszczenia ekranu zarówno w systemie Windows (`cls`), jak i Unix/Linux (`clear`).
-
-4. **Czytelność i komentarze**: Kod jest dobrze skomentowany, dostarczając wyjaśnień dla głównych funkcji i logiki.
-
-5. **Przyjazne dla użytkownika komunikaty**: Zintegrowano obsługę błędów (np. uniemożliwiając graczom wybieranie już odkrytych kart lub tej samej karty dwukrotnie).
 
 ---

@@ -22,7 +22,7 @@ void clearScreen() {
 #endif
 }
 
-// Trophy animation frames
+// Animacja trofeum.
 void displayTrophyAnimation(string player) {
     string trophy1 = R"(
              ___________
@@ -64,7 +64,7 @@ void displayTrophyAnimation(string player) {
     }
 }
 
-// Losing face animation for AI win
+// Animacja przegrania.
 void displayLoseAnimation() {
     
     string loseFace = R"(
